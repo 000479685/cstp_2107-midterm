@@ -8,7 +8,7 @@ import CartContext from '../../context/CartContext'
 // {
 //     console.log("Adding to cart", product.title)
 // }
-const ProductCard = ({product, cartDetails, setCartDetails}) =>
+const ProductCard = ({product}) =>
 {
     const {cartData} = useContext(CartContext)
     const navigate = useNavigate();
@@ -16,8 +16,8 @@ const ProductCard = ({product, cartDetails, setCartDetails}) =>
     const addToCart = () =>
         {                              
             let temp = cartData
-            temp.push(product)            
-            setCartDetails(temp)
+            // console.log(cartData)
+            temp.push(product)                        
         }
 
     return (

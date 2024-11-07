@@ -1,18 +1,18 @@
 import axios from 'axios'
 import DataContext from '../context/DataContext'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import '../App.css'
 import { AppBar, Box, Button } from '@mui/material'
 import {useNavigate} from "react-router-dom"
 import CardList from '../components/CardList/CardList'
 import { API_URL } from '../constant'
 import SearchBar from '../components/Navigation/Searchbar'
-import CartContext from '../context/CartContext'
+// import CartContext from '../context/CartContext'
 
 function Home() {
   const [productData, setProductData] = useState([]);
   const [currentQuery, setCurrentQuery] = useState('');  
-  const [cartData, setCartData] = useState([])
+  // const cartData = useContext(CartContext)
 
   const productInfo = async() => {
     const {data} = await axios.get(`${API_URL}`);
@@ -62,8 +62,7 @@ const navigate = useNavigate();
 
   return (
     <>
-    <DataContext.Provider value={{productData, setProductData}}>
-      <CartContext.Provider value={{cartData, setCartData}}>
+    <DataContext.Provider value={{productData, setProductData}}>      
       <AppBar>        
         <Box display='flex' flexDirection='row'>
           <Button color='#424242' onClick={() => navigate('/')}>Home</Button>
@@ -75,8 +74,7 @@ const navigate = useNavigate();
       </AppBar>
 
       <Box marginTop="100px"></Box>
-      <CardList cartDetails={cartData} setCartDetails={setCartData}></CardList>
-      </CartContext.Provider>
+      <CardList></CardList>      
     </DataContext.Provider>
     </>
   )

@@ -4,11 +4,12 @@ import Checkout from "./pages/Checkout"
 import Home from "./pages/Home"
 import ProductDetails from "./pages/ProductDetails"
 import NotFoundPage from './pages/NotFoundPage'
-
+import CartContext from './context/CartContext'
+import { useState } from 'react'
 
 function App()
 {
-
+    const [cartData, setCartData] = useState([])
     let element = useRoutes(
         [      
             {
@@ -37,7 +38,11 @@ function App()
             }
     ]
   )
-  return element
+  return (
+    <CartContext.Provider value={{cartData, setCartData}}>
+        {element}
+    </CartContext.Provider>
+)
 }
 
 export default App

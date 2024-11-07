@@ -8,7 +8,7 @@ import CartContext from '../context/CartContext'
 
 function ProductDetails()
 {
-    // const {cartData} = useContext(CartContext)
+    const {cartData} = useContext(CartContext)
     const {product } = useParams()
     const [productData, setProductData] = useState({})
     const navigate = useNavigate()
@@ -18,8 +18,8 @@ function ProductDetails()
         const getProductInfo = async () => 
             {
                 const data = await axios.get(`${API_URL}${product}`)
-                console.log(data)     
-                console.log(data.data)           
+                // console.log(data)     
+                // console.log(data.data)           
                 setProductData(data.data)
             }
         getProductInfo();
@@ -27,12 +27,12 @@ function ProductDetails()
     , [])
     
 
-    const addToCart = () =>
-    {
-        // let temp = cartData
-        // temp.push(product)            
-        // setCartDetails(temp)
-    }
+    // const addToCart = () =>
+    // {
+    //     let temp = cartData
+    //     console.log(cartData)
+    //     temp.push(productData)      
+    // }
 
 
     return (        
@@ -58,7 +58,10 @@ function ProductDetails()
                 </Typography>
             </CardContent>
             <Box alignSelf="flex-center" marginTop="auto">
-                <Button  color='#424242' onClick={addToCart()}>
+                <Button  color='#424242' onClick={() => {
+                            let temp = cartData
+                            console.log(cartData)
+                            temp.push(productData)    }}>
                     Add
                 </Button>
             </Box>
