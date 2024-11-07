@@ -1,16 +1,22 @@
-import React from 'react'
-import card from '../Card/Card'
+import React, {useContext} from 'react'
+import ProductCard from '../Card/ProductCard'
+import DataContext from '../../context/DataContext'
+import {Box} from '@mui/material'
 
-const CardList = ({productData}) =>
+const CardList = ({}) =>
 {
+    const {productData} = useContext(DataContext)
+
     return (
-        <div className=''>
+        <Box display="grid" gridTemplateColumns="33% 33% 33%" gap="10px">
             {
                 productData.map((product, index) =>
                 {
-                    return <Card product={product} key={index}/>
+                    return <ProductCard product={product} key={index}/>
                 })
             }
-        </div>
+        </Box>
     )
 }
+
+export default CardList
