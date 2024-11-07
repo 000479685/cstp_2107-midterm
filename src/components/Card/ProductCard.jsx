@@ -29,9 +29,9 @@ const ProductCard = ({product, cartDetails, setCartDetails}) =>
                     </Box>
                 </CardHeader>
 
-                
-                <Avatar src={product.image} alt="Product Image" />
-                
+                <Box alignContent="center" justifyContent="center" component="img" maxHeight="150px" maxWidth="150px" src={product.image} alt="Product Image">
+                    {/* <Avatar src={product.image} alt="Product Image" /> */}
+                </Box>
                 <Button onClick={() => navigate(`/ProductDetails/${product.id}`)}>See More</Button>
 
                 <CardContent>

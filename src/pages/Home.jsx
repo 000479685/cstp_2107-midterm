@@ -64,16 +64,17 @@ const navigate = useNavigate();
     <>
     <DataContext.Provider value={{productData, setProductData}}>
       <CartContext.Provider value={{cartData, setCartData}}>
-      <AppBar>
-        <h3>Midterm - Aiden Wu</h3>
+      <AppBar>        
         <Box display='flex' flexDirection='row'>
           <Button color='#424242' onClick={() => navigate('/')}>Home</Button>
           <Button color='#424242'onClick={() => navigate('/Cart')}>Cart</Button>
           <Button color='#424242' onClick={() => navigate('/Checkout')}>Checkout</Button>        
+          <Box marginLeft="auto">Aiden Wu - Midterm</Box>
         </Box>
         <SearchBar currentQuery={currentQuery} handleSearchClick={handleSearchClick} setCurrentQuery={setCurrentQuery}/>
       </AppBar>
 
+      <Box marginTop="100px"></Box>
       <CardList cartDetails={cartData} setCartDetails={setCartData}></CardList>
       </CartContext.Provider>
     </DataContext.Provider>
