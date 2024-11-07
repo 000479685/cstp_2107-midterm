@@ -1,83 +1,43 @@
-import axios from 'axios'
-import DataContext from './context/DataContext'
-import { useState, useEffect } from 'react'
-import './App.css'
-import { AppBar, IconButton, MenuIcon } from '@mui/material'
-import CardList from './components/CardList/CardList'
-import { API_URL } from './constant'
-import SearchBar from './components/Navigation/Searchbar'
+import {useRoutes} from 'react-router-dom'
+import Cart from "./pages/Cart"
+import Checkout from "./pages/Checkout"
+import Home from "./pages/home"
+import ProductDetails from "./pages/ProductDetails"
+import NotFoundPage from './pages/NotFoundPage'
 
 
-function App() {
-  const [productData, setProductData] = useState([]);
-  const [currentQuery, setCurrentQuery] = useState('');  
+function App()
+{
 
-  const productInfo = async() => {
-    const {data} = await axios.get(`${API_URL}`);
-    {console.log("Using this data : ", data)}
-    // {console.log(data.data)}
-    setProductData(data);
-    // console.log(productData)    
-  }
-
-  const handleSearchClick = () =>
-  {
-    searchInfo();
-  }
-
-  const searchInfo = () =>
-  {
-    if(currentQuery == '')
-    {
-      productInfo();
-      return;
-    }
-
-    setProductData(productData.filter((product, index) =>
-      {
-      const queryRegex = `.*${currentQuery.toLowerCase()}.*`
-      console.log(queryRegex)
-      console.log(`${product.title}`)
-      if(product.title.toLowerCase().match(queryRegex))
-      {      
-        return true;
-      }
-      return false;
-    }))
-  }
-  
-  useEffect(() =>
-  {
-    const onStartDataFetch = async() =>
-    {
-      const {data} = await axios.get(`${API_URL}`);      
-      setProductData(data);
-    }
-    onStartDataFetch();
-  }, [])
-
-  return (
-    <>
-    <DataContext.Provider value={{productData, setProductData}}>
-      <AppBar>
-      <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-        <h3>Midterm - Aiden Wu</h3>
-        <SearchBar currentQuery={currentQuery} handleSearchClick={handleSearchClick} setCurrentQuery={setCurrentQuery}/>
-      </AppBar>
-
-      <CardList></CardList>
-    </DataContext.Provider>
-    </>
+    let element = useRoutes(
+        [      
+            {
+                path: '/',
+                element: <Home />
+            },
+            {
+                path: '/Home',
+                element: <Home />
+            },
+            {
+                path: '/cart/',
+                element: <Cart />
+            },
+            {
+                path: '/checkout/',
+                element: <Checkout />
+            },
+            {
+                path: '/productDetails/:product',
+                element: <ProductDetails />
+            },
+            {
+                path: '*',
+                element: <NotFoundPage />
+            }
+    ]
   )
+  return element
 }
 
 export default App
-

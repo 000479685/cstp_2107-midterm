@@ -4,7 +4,7 @@ function Cart()
 {
     return (
         <div>
-        
+         Something here
       </div>
     )
 }
